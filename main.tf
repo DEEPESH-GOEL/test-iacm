@@ -1,47 +1,20 @@
 terraform {
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
+    aws = { source = "hashicorp/aws", version = "~> 5.0" }
   }
 }
 
-provider "aws" {
-  region = var.region
-}
+provider "aws" { region = var.region }
 
-resource "aws_instance" "web" {
+module "ec2" {
+  source = "app.harness.io/l7HREAyVTnyfUsfUtPZUow/default/Deepeshtestiacm/4953/aws"
+  version = "1.0.0"
+
   ami           = var.ami
   instance_type = var.instance_type
-
-  tags = {
-    Name        = "${var.instance_name}-${var.environment}"
-    Environment = var.environment
-    ManagedBy   = "terraform"
-  }
-}
-resource "aws_s3_bucket" "storage" {
-  bucket = "${var.instance_name}-${var.environment}-storage"
-
-  tags = {
-    Name        = "${var.instance_name}-${var.environment}-storage"
-    Environment = var.environment
-    ManagedBy   = "terraform"
-  }
+  instance_name = var.instance_name
+  environment   = var.environment
 }
 
-output "bucket_name" {
-  value = aws_s3_bucket.storage.bucket
-}
-
-
-
-output "public_ip" {
-  value = aws_instance.web.public_ip
-}
-
-output "instance_id" {
-  value = aws_instance.web.id
-}
-
+output "instance_id" { value = module.ec2.instance_id }
+output "public_ip"   { value = module.ec2.public_ip }
