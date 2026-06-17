@@ -18,3 +18,7 @@ variable "instance_name" {
   default     = "my-ec2-from-git"
 }
 
+variable "environment" {
+  description = "Environment name"
+  default     = "dev"
+}
