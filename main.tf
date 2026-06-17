@@ -7,8 +7,8 @@ terraform {
 provider "aws" { region = var.region }
 
 module "ec2" {
-  source = "app.harness.io/l7HREAyVTnyfUsfUtPZUow/default/Deepeshtestiacm/4953/aws"
-  version = "1.0.0"
+  source = "module.app.harness.io/l7HREAyVTnyfUsfUtPZUowN0dbHpRgRDOgg09wZK__gg/dg-ec2-module/aws"
+  version = "1.0.1"
 
   ami           = var.ami
   instance_type = var.instance_type
