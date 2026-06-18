@@ -11,15 +11,36 @@ provider "aws" {
   region = var.region
 }
 
-module "dg-ec2-instance-harness-repo" {
-  source  = "module.app.harness.io/l7HREAyVTnyfUsfUtPZUowN0dbHpRgRDOgg09wZK__gg/dg-ec2-instance-harness-repo/aws"
-  version = "v1.0.0"
-  instance_name = var.instance_name
-  instance_type = var.instance_type
+resource "aws_instance" "web" {
   ami           = var.ami
-  environment   = var.environment
+  instance_type = var.instance_type
 
-
+  tags = {
+    Name        = "${var.instance_name}-${var.environment}"
+    Environment = var.environment
+    ManagedBy   = "terraform"
+  }
 }
-output "instance_id" { value = module.ec2.instance_id }
-output "public_ip"   { value = module.ec2.public_ip }
+resource "aws_s3_bucket" "storage" {
+  bucket = "${var.instance_name}-${var.environment}-storage"
+
+  tags = {
+    Name        = "${var.instance_name}-${var.environment}-storage"
+    Environment = var.environment
+    ManagedBy   = "terraform"
+  }
+}
+
+output "bucket_name" {
+  value = aws_s3_bucket.storage.bucket
+}
+
+
+
+output "public_ip" {
+  value = aws_instance.web.public_ip
+}
+
+output "instance_id" {
+  value = aws_instance.web.id
+}
