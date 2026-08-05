@@ -1,0 +1,43 @@
+pipeline:
+  name: test2
+  identifier: test2
+  projectIdentifier: Deepeshtestiacm
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: nk.njk k
+        identifier: nknjk_k
+        description: ""
+        type: IACM
+        spec:
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: IACMAwsCdkPlugin
+                  name: bootstrap
+                  identifier: bootstrap
+                  timeout: 10m
+                  spec:
+                    command: bootstrap
+              - step:
+                  type: IACMAwsCdkPlugin
+                  name: synth
+                  identifier: synth
+                  timeout: 10m
+                  spec:
+                    command: synth
+              - step:
+                  type: IACMAwsCdkPlugin
+                  name: diff
+                  identifier: diff
+                  timeout: 10m
+                  spec:
+                    command: diff
+        tags: {}
