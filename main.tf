@@ -12,6 +12,17 @@ terraform {
   }
 }
 
+terraform {
+  backend "http" {
+    address = "https://app.harness.io/gateway/iacm/api/orgs/default/projects/Deepeshtestiacm/workspaces/ec2dev/terraform-backend?accountIdentifier=l7HREAyVTnyfUsfUtPZUow"
+    username = "harness"
+    lock_address = "https://app.harness.io/gateway/iacm/api/orgs/default/projects/Deepeshtestiacm/workspaces/ec2dev/terraform-backend/lock?accountIdentifier=l7HREAyVTnyfUsfUtPZUow"
+    lock_method = "POST"
+    unlock_address = "https://app.harness.io/gateway/iacm/api/orgs/default/projects/Deepeshtestiacm/workspaces/ec2dev/terraform-backend/lock?accountIdentifier=l7HREAyVTnyfUsfUtPZUow"
+    unlock_method = "DELETE"
+  }
+}
+
 provider "aws" {
   region = var.region
 }
