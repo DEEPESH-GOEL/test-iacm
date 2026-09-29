@@ -16,6 +16,7 @@ terraform {
   backend "http" {
     address = "https://app.harness.io/gateway/iacm/api/orgs/default/projects/Deepeshtestiacm/workspaces/ec2dev/terraform-backend?accountIdentifier=l7HREAyVTnyfUsfUtPZUow"
     username = "harness"
+    password = "pat.l7HREAyVTnyfUsfUtPZUow.6a8ac777966c5442af572926.wxerDDvpciBP8YNO3uVO"
     lock_address = "https://app.harness.io/gateway/iacm/api/orgs/default/projects/Deepeshtestiacm/workspaces/ec2dev/terraform-backend/lock?accountIdentifier=l7HREAyVTnyfUsfUtPZUow"
     lock_method = "POST"
     unlock_address = "https://app.harness.io/gateway/iacm/api/orgs/default/projects/Deepeshtestiacm/workspaces/ec2dev/terraform-backend/lock?accountIdentifier=l7HREAyVTnyfUsfUtPZUow"
